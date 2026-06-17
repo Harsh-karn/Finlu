@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: flowmoney_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: flowmoney
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: flowmoney_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: flowmoney_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/flowmoney
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      - postgres
+      - redis
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  celery:
+    build: ./backend
+    container_name: flowmoney_celery
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql://user:password@postgres:5432/flowmoney
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      - redis
+      - postgres
+    command: celery -A app.workers.tasks worker --loglevel=info
+
+volumes:
+  postgres_data:
