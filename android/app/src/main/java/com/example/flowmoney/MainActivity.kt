@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                                 settings.javaScriptEnabled = true
                                 settings.domStorageEnabled = true
                                 webViewClient = WebViewClient()
-                                loadUrl("https://flowmoney.vercel.app")
+                                loadUrl("https://finlo-dashboard.vercel.app")
                             }
                         },
                         modifier = Modifier.fillMaxSize()
