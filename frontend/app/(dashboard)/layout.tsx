@@ -1,5 +1,6 @@
 import { Sidebar } from '@/components/shared/Sidebar'
 import { Header } from '@/components/shared/Header'
+import { DeviceRegistrar } from '@/components/DeviceRegistrar'
 
 export default function DashboardLayout({
   children,
@@ -12,6 +13,7 @@ export default function DashboardLayout({
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
         <main className="flex-1 overflow-y-auto p-6 scroll-smooth">
+          <DeviceRegistrar />
           {children}
         </main>
       </div>

@@ -3,6 +3,9 @@ package com.example.flowmoney
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.content.Context
+import android.util.Log
+import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
@@ -14,6 +17,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+
+class WebAppInterface(private val context: Context) {
+    @JavascriptInterface
+    fun setApiKey(apiKey: String) {
+        val prefs = context.getSharedPreferences("fynlo_prefs", Context.MODE_PRIVATE)
+        prefs.edit().putString("device_api_key", apiKey).apply()
+        Log.d("WebAppInterface", "API Key saved securely.")
+    }
+}
 
 class MainActivity : ComponentActivity() {
 
@@ -42,6 +54,7 @@ class MainActivity : ComponentActivity() {
                                 settings.javaScriptEnabled = true
                                 settings.domStorageEnabled = true
                                 webViewClient = WebViewClient()
+                                addJavascriptInterface(WebAppInterface(this@MainActivity), "Android")
                                 // Load the actual Fynlo production dashboard
                                 loadUrl("https://fynlo-sigma.vercel.app")
                             }

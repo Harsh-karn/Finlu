@@ -28,8 +28,14 @@ class SmsUploadWorker(
         sdf.timeZone = TimeZone.getTimeZone("UTC")
         val isoDate = sdf.format(Date(receivedAtMillis))
         
-        // Get API Key from SharedPreferences in real app
-        val deviceApiKey = "mock_api_key_from_shared_prefs" 
+        // Get API Key from SharedPreferences
+        val prefs = applicationContext.getSharedPreferences("fynlo_prefs", Context.MODE_PRIVATE)
+        val deviceApiKey = prefs.getString("device_api_key", null)
+        
+        if (deviceApiKey.isNullOrEmpty()) {
+            Log.e("SmsUploadWorker", "No API Key found. Skipping upload.")
+            return Result.failure()
+        }
         
         val json = JSONObject().apply {
             put("raw_sms", rawSms)
@@ -41,7 +47,7 @@ class SmsUploadWorker(
         val body = json.toString().toRequestBody(mediaType)
         
         val request = Request.Builder()
-            .url("http://10.0.2.2:8000/api/v1/sms/ingest") // Emulator to localhost
+            .url("https://fynlo-api.onrender.com/api/v1/sms/ingest")
             .post(body)
             .build()
             
