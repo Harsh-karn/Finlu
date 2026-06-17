@@ -42,7 +42,8 @@ class MainActivity : ComponentActivity() {
                                 settings.javaScriptEnabled = true
                                 settings.domStorageEnabled = true
                                 webViewClient = WebViewClient()
-                                loadUrl("https://fynlo-dashboard.vercel.app")
+                                // Load the actual Fynlo production dashboard
+                                loadUrl("https://fynlo-sigma.vercel.app")
                             }
                         },
                         modifier = Modifier.fillMaxSize()
