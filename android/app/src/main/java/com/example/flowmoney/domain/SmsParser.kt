@@ -1,4 +1,4 @@
-package com.flowmoney.domain
+package com.example.flowmoney.domain
 
 import java.util.regex.Pattern
 

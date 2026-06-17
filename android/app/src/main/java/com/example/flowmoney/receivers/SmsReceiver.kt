@@ -1,4 +1,4 @@
-package com.flowmoney.receivers
+package com.example.flowmoney.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,8 +8,8 @@ import android.util.Log
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import com.flowmoney.domain.SmsParser
-import com.flowmoney.workers.SmsUploadWorker
+import com.example.flowmoney.domain.SmsParser
+import com.example.flowmoney.workers.SmsUploadWorker
 
 class SmsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

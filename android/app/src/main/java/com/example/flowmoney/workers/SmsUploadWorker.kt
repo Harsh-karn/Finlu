@@ -1,4 +1,4 @@
-package com.flowmoney.workers
+package com.example.flowmoney.workers
 
 import android.content.Context
 import android.util.Log
