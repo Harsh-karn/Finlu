@@ -13,7 +13,6 @@ redis
 pdfplumber
 PyMuPDF
 pandas
-google-generativeai
 fastapi-mail
 python-dotenv
 pytest

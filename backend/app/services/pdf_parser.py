@@ -32,8 +32,6 @@ class PDFParserService:
                                 transactions.append(tx)
         except Exception as e:
             print(f"Failed to parse PDF: {e}")
-            # If pdfplumber fails, we would ideally fall back to Gemini Vision
-            # This is left as a placeholder for the Gemini Vision fallback logic
             pass
 
         return transactions

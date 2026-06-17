@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
-    GEMINI_API_KEY: Optional[str] = None
+    
     REDIS_URL: str = "redis://localhost:6379/0"
     CLOUDINARY_URL: Optional[str] = None
     FRONTEND_URL: str = "http://localhost:3000"

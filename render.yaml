@@ -15,8 +15,6 @@ services:
           type: redis
           name: fynlo-redis
           property: connectionString
-      - key: GEMINI_API_KEY
-        sync: false # You will need to enter this manually in the dashboard
 
   - type: redis
     name: fynlo-redis
