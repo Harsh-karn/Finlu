@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Change to backend directory
+cd backend
+
 # Run database migrations
 echo "Running migrations..."
 alembic upgrade head
